@@ -8,6 +8,27 @@ if (Platform.OS === 'android'){
 const ToDoItem = ({item, trocaEstado, deleta }) => {
     const[isExpanded, SetIsExpanded] = useState(false);
     const animationValue = useRef(new Animated.Value(0)).current
+    const pan = wseRef(new Animated.ValueXY()).current;
+
+    const panResponder = useRef(PanResponder.create({
+        onMoveShouldSetPanResponder: () => true,
+        onPanResponderMove: Animated.event([null, {dx: pan.x}],
+                                 {useNativeDriver: false}),
+        onPanresponderRelease: (_, gestureState) => {
+            if (gestureState.dx < -200) {
+                deleta(item.id)
+            }
+            else {
+                Animated.spring(
+                    pan,
+                    {toValeu: {x: 0, y:0},
+                    useNativeDriver: false},
+                ).start()
+                
+            }
+
+        },            
+    })).current
     const expand = () =>{
         LayoutAnimation.spring()
         SetIsExpanded(!isExpanded)
@@ -74,6 +95,10 @@ const styles = StyleSheet.create({
     deleteButton: {
         color: 'red',
         fontSize: 18,
+    },
+    textContainer: {
+        flex: 1,
+        alignItems: 'center'
     },
 });
 

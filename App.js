@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
       const [Tarefas, setTarefas] = useState([ ]);
       const deleta= (tarefaId) => {
     setTarefas((tarefas) => {
-      let novasTarefas = tarefas.filtar((item) => item.id !==tarefaId)
+      let novasTarefas = tarefas.filter((item) => item.id !==tarefaId)
       return novasTarefas
     })
   }
