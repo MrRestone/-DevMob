@@ -1,5 +1,5 @@
 import React, {useState,useRef, useEffect} from 'react';
-import{ Animated, View, Text, TouchableOpacity, StyleSheet, Switch, UIManager, LayoutAnimation,Platform } from 'react-native';
+import{ Animated, View, Text, TouchableOpacity, StyleSheet, Switch, UIManager, LayoutAnimation,Platform, PanResponder} from 'react-native';
 
 if (Platform.OS === 'android'){
     UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -8,7 +8,7 @@ if (Platform.OS === 'android'){
 const ToDoItem = ({item, trocaEstado, deleta }) => {
     const[isExpanded, SetIsExpanded] = useState(false);
     const animationValue = useRef(new Animated.Value(0)).current
-    const pan = wseRef(new Animated.ValueXY()).current;
+    const pan = useRef(new Animated.ValueXY()).current;
 
     const panResponder = useRef(PanResponder.create({
         onMoveShouldSetPanResponder: () => true,
@@ -21,7 +21,7 @@ const ToDoItem = ({item, trocaEstado, deleta }) => {
             else {
                 Animated.spring(
                     pan,
-                    {toValeu: {x: 0, y:0},
+                    {toValue: {x: 0, y:0},
                     useNativeDriver: false},
                 ).start()
                 
@@ -43,7 +43,8 @@ const ToDoItem = ({item, trocaEstado, deleta }) => {
     }, [item.completado])
 
     return(
-    <View style={styles.container}>   
+
+    <Animated.View {... panResponder.panHandlers} style={[{transform: [{translateX: pan.x}]}, styles.container,{opacity: animationValue }]}>   
      <View style={styles.todoItem}>
             <Switch
                 value={item.completado}
@@ -64,7 +65,7 @@ const ToDoItem = ({item, trocaEstado, deleta }) => {
             <Text Style={styles.text}><Text style={{fontWeight: 'bold'}}>&#8226; Descrição: </Text> {item.tarefa.descricao}</Text>
         </View> 
      )}
-    </View> 
+    </Animated.View> 
     );
 };
 
