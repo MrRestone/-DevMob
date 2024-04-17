@@ -30,13 +30,13 @@ const TelaLogin = ({ navigation}) => {
                 {loginFailed && <Text style ={styles.loginFailed}>Usuário ou Senha inválidas</Text>}
                 <TextInput
                     placeholder ="E-mail"
-                    valeu={email}
+                    value={email}
                     onChangeText={(text) => setEmail(text)}
                     style={styles.input}
                 />
                 <TextInput
                     placeholder ="Senha"
-                    valeu={password}
+                    value={password}
                     onChangeText={(text) => setPassword(text)}
                     secureTextEntry
                     style={styles.input}

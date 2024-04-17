@@ -8,7 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import TelaAddTarefa from './Componentes/addTarefa';
 import TelaLogin from './Componentes/login';
 import TelaAddUser from './Componentes/addUser';
-import firebase from './servicos/firebase'
+import firebase from './serviços/firebase'
 import {getDatabase, ref, get, update, set, remove } from "firebase/database"
 
 const Stack = createStackNavigator();
@@ -90,5 +90,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-

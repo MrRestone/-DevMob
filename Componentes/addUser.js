@@ -18,25 +18,26 @@ function TelaAddUser({navigation}) {
         })
         .catch((error) => {
             console.error('Erro ao criar usuário:', error.menssage)
-            serCreatefailed(true)
+            setCreateFailed(true)
         })
     };
     return(
-        <View style={StyleSheet.container}>
-            {createFailed && <Text style={StyleSheet.createFailed}>Falha ao criar Usuário.</Text>}
+        <View style={styles.container}>
+            {createFailed && <Text style={styles.createFailed}>Falha ao criar Usuário.</Text>}
             <TextInput
                 placeholder="E-mail"
                 valeu={email}
                 onChangeText={(text) => setEmail(text)}
-                style={styleSheet.input}
+                style={styles.input}
             />
             <TextInput
                  placeholder="Senha"
                  valeu={senha}
                  onChangeText={(text) => setSenha(text)}
                  secureTextEntry={true}
-                 style={styleSheet.input}
+                 style={styles.input}
             />
+            <Button title="Registrar" onPress={registrar}/>
         </View>
     );
 }
